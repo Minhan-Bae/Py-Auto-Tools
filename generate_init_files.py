@@ -8,6 +8,7 @@ in a real project.
 """
 
 import os
+import sys
 
 def create_init_py(path):
     """
@@ -35,7 +36,30 @@ def create_init_py(path):
 
             print(f"Created: {init_path}")
 
-# Use the current working directory as the repository path.
+def delete_empty_init_py(path):
+    """
+    Deletes __init__.py files if they have no content (except comments)
+
+    Args:
+        path (str): The root directory to start deleting empty __init__.py files from.
+    """
+    for root, _, files in os.walk(path):
+        init_path = os.path.join(root, "__init__.py")
+
+        # If the file exists and is empty (ignoring comments), delete it
+        if os.path.isfile(init_path):
+            with open(init_path, "r") as init_file:
+                lines = init_file.readlines()
+
+                # Check if all lines are comments or blank
+                is_empty = all((line.strip() == '' or line.strip().startswith('#')) for line in lines)
+
+                if is_empty:
+                    os.remove(init_path)
+                    print(f"Deleted: {init_path}")
+
+
 if __name__=="__main__":
-    repository_path = os.getcwd()
+    repository_path = sys.argv[1]
     create_init_py(repository_path)
+    delete_empty_init_py(repository_path)
