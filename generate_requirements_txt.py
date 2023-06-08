@@ -3,6 +3,7 @@
 # library names and versions to the requirements.txt file.
 
 import os
+import sys
 import pkg_resources
 
 def extract_modules_from_files(path):
@@ -29,7 +30,7 @@ def extract_modules_from_files(path):
 
     return modules
 
-def generate_requirements_txt(path, output_file="requirements.txt"):
+def generate_requirements_txt(path, output_file=os.path.join(sys.argv[1],"requirements.txt")):
     """
     Generate a requirements.txt file for a Python project.
 
@@ -53,5 +54,5 @@ def generate_requirements_txt(path, output_file="requirements.txt"):
     print(f"Generated {output_file}")
 
 if __name__=="__main__":
-    repository_path = os.getcwd()  # Use the current working directory
+    repository_path = sys.argv[1]  # Use the current working directory
     generate_requirements_txt(repository_path)
