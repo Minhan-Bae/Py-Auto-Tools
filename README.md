@@ -1,4 +1,4 @@
-# Py-Auto-Tools*Python Repository Automation Tools)
+# Py-Auto-Tools(Python Repository Automation Tools)
 
 This repository provides a collection of automation scripts useful for Python project development. These tools enhance development efficiency by automating common tasks such as generating directory structures, managing `__init__.py` files, creating dependency lists, and cleaning up unnecessary files.
 
